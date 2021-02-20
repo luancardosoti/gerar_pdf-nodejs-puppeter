@@ -25,20 +25,15 @@ const passengers = [
 app.get("/pdf", async (req, res) => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
+  await page.goto("http://localhost:3333");
 
-  await page.goto("http://localhost:3333/", {
-    waitUntil: "networkidle0",
+  const pageContent = await page.evaluate((x) => {
+    return (document.querySelector("#button-gerar_pdf").innerHTML = "");
   });
 
   const pdf = await page.pdf({
     printBackground: true,
     format: "Letter",
-    margin: {
-      top: "20px",
-      bottom: "40px",
-      left: "20px",
-      right: "20px",
-    },
   });
 
   await browser.close();
