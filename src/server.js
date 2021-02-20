@@ -26,7 +26,7 @@ app.get("/pdf", async (req, res) => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
-  await page.goto("http://localhost:4000/", {
+  await page.goto("http://localhost:3333/", {
     waitUntil: "networkidle0",
   });
 
@@ -59,6 +59,6 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(4000, () => {
-  console.log("🚀  Server started on Port 4000");
+app.listen(3333, () => {
+  console.log("🚀  Server started on Port 3333");
 });
